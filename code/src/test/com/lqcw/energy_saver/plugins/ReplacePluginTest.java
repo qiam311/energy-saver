@@ -21,6 +21,7 @@ class ReplacePluginTest {
                 "queryDate\t查询日期\n" +
                 "operator\t查询操作员\n" +
                 "queryReason\t查询原因\n";
+        mapStr = mapStr.replaceAll(" ", "");
         String[] strings = mapStr.split("\n");
         Map<String, String> map = new HashMap<>();
         for (String str : strings) {
