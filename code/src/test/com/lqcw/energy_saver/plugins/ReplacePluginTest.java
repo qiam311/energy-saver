@@ -13,8 +13,10 @@ import java.util.Map;
  */
 class ReplacePluginTest {
 
-    @Test
-    public static void replace() {
+    /**
+     * 替换 html
+     */
+    public static void replaceHtml() {
         String src = "<div class=\"p-2 flex-fill flex-column align-items-center droppable\"> <label class=\"p-2 \">$1：</label> <div class=\"position-relative\"> <select ng-model=\"mapping.$2.$0\" class=\"form-control form-control-chosen-optgroup my-chosen-select\" data-name=\"$2_$0\" title=\"clickable_optgroup\" data-placeholder=\"Please select...\"> <option value=\"\"> </option> <optgroup label=\"{{key}}\" ng-repeat=\"(key,item) in head \"> <option ng-repeat=\"(x,option) in item track by $index\" ng-disabled=\"option.checked\" value=\"{{option}}\"> {{option.headName}} </option> </optgroup> </select></div> </div>";
         String table = "businesscreditreportqueryrecdetail";
         String mapStr = "recordsId\t编号\n" +
@@ -33,7 +35,44 @@ class ReplacePluginTest {
         }
     }
 
+    /**
+     * 替换形如  #{item.data,jdbcType=VARCHAR}
+     */
+    public static void replace2() {
+        String src = "#{item.$0,jdbcType=$1},";
+        String mapStr = "recordsId\tint\n" +
+                "queryDate\tvarchar\n" +
+                "operator\tvarchar\n" +
+                "queryReason\tint\n";
+        mapStr = mapStr.replaceAll(" ", "");
+        String[] strings = mapStr.split("\n");
+        for (String str : strings) {
+            String[] split = str.split("\t");
+            String res = src.replace("$0", split[0]);
+            switch (split[1]) {
+                case "int":
+                    res = res.replace("$1", "INTEGER");
+                    break;
+                case "bigint":
+                    res = res.replace("$1", "BIGINT");
+                    break;
+                case "decimal":
+                    res = res.replace("$1", "DECIMAL");
+                    break;
+                default:
+                    res = res.replace("$1", "VARCHAR");
+            }
+            System.out.println(res);
+        }
+        System.out.println();
+        for (String str : strings) {
+            String[] split = str.split("\t");
+            System.out.println(split[0] + ",");
+        }
+    }
+
     public static void main(String[] args) {
-        replace();
+        replace2();
+//        replace();
     }
 }
