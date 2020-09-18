@@ -1,4 +1,4 @@
-package com.lqcw.energy_saver.mock.util;
+package com.lqcw.energy_saver.mock.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
