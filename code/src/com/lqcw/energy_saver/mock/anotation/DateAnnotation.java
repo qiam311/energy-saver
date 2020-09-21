@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface DateAnotation {
+public @interface DateAnnotation {
     /**
      * 最大日期
      * 格式与 format() 一致
