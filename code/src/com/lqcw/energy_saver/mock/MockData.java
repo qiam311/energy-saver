@@ -7,7 +7,7 @@ package com.lqcw.energy_saver.mock;
  * @Modified By:
  */
 public class MockData {
-    public static <T> T create(Class<T> tClass) {
-
-    }
+//    public static <T> T create(Class<T> tClass) {
+//
+//    }
 }
